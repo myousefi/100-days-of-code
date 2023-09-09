@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> powerfulIntegers(int x, int y, int bound) {
+        vector<int> ans;
+        unordered_set<int> keys; 
+        vector<int> lstx;
+        lstx.push_back(1);
+        vector<int> lsty;
+        lsty.push_back(1);
+        if(x!=1){
+            for(int i=1;pow(x,i)<=bound;i++){
+            lstx.push_back(pow(x,i));
+        }
+        }
+        
+        if(y!=1){
+        for(int i=1;pow(y,i)<=bound;i++){
+            lsty.push_back(pow(y,i));
+        }    
+        }      
+        
+        
+        for(int i:lstx){
+            for(int j:lsty){
+                if(i+j<=bound) keys.insert(i+j);
+            }
+        }
+        for(int i:keys){
+            ans.push_back(i);
+        }
+        return ans;
+    }
+};
