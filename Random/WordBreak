@@ -28,6 +28,38 @@ class Solution {
     }
 }
 
+// C++
+
+class Solution {
+public:
+    
+   bool helper(string s, unordered_set<string> set,unordered_map<string,bool> &mapp){
+       
+       int len = s.length();
+       if(len==0) return true;
+       if(mapp.find(s)!=mapp.end()) return mapp[s];
+       for(int i=0;i<len;i++){
+           if(set.find(s.substr(0,i+1))!=set.end() && helper(s.substr(i+1),set,mapp)){
+               mapp[s.substr(i+1)] = true;
+               return true;
+           }
+       }
+       mapp[s] = false;
+       return false;
+   } 
+    
+    
+    
+    bool wordBreak(string s, vector<string>& wordDict) {
+        
+        unordered_set<string> _set;
+        unordered_map<string,bool> _map;
+        for(string str: wordDict){
+            _set.insert(str);
+        }
+        return helper(s,_set,_map);
+    }
+};
 
 
     
