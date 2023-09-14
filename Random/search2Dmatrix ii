@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        
+       
+        
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+        
+        int start_row = 0;
+        int end_col = cols-1;
+        
+     
+        
+        while(start_row<rows && end_col>=0){
+            
+            int temp = matrix[start_row][end_col];
+            
+            if(target==temp) return true;
+            else if(target<temp) {
+                end_col--;
+            }
+            else{
+               start_row++; 
+            }             
+        }
+        
+        
+        return false;
+    }
+};
