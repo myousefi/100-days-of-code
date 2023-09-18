@@ -1,0 +1,22 @@
+//dp, sliding window good prob
+
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        int tot = 0;
+        int n = cardPoints.size();
+        for(int num:cardPoints){
+            tot += num;
+        }
+        int winsum = 0;
+        for(int i=0;i<n-k;i++){
+            winsum+=cardPoints[i];
+        }
+        int res = tot - winsum;
+        for(int i=n-k;i<n;i++){
+            winsum += cardPoints[i] - cardPoints[i-(n-k)];
+            res = max(res,tot-winsum);
+        }
+        return res;
+    }
+};
