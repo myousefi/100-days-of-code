@@ -3,10 +3,10 @@ public:
     int height(TreeNode* root){
         if(root==NULL) return 0;
         
-        int left = 1+height(root->left);
-        int right = 1+height(root->right);
+        int left = (root->left);
+        int right = (root->right);
         
-        return max(left,right);
+        return 1+max(left,right);
     }
     
 
