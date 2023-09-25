@@ -13,4 +13,4 @@ public:
         return height(root);
     }
 };
-// Note that height of [3,9,20,null,null,15,7] is 3. Acc to book 3, but online questions, CN vids, its 3 only  
+// Note that height of [3,9,20,null,null,15,7] is 3. Acc to book 2, but online questions, CN vids, its 3 only  
