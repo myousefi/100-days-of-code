@@ -1,0 +1,60 @@
+class Solution {
+public:
+    vector<vector<string>> res;
+    bool isSafe(vector<string> board, int curRow, int curCol, int n){
+        
+        //Checking for same column
+        
+        for(int i=0;i<curRow;i++){
+            if(board[i][curCol]=='Q') return false;
+        }
+        
+        //Checking for right diagonal 
+        
+        int x = curRow;
+        int y = curCol;
+        
+        while(x>=0 && y<=n-1){
+            if(board[x][y]=='Q') return false;
+            x--;
+            y++;
+        }
+        //Checking for left diagonal
+        
+        int l = curRow;
+        int m = curCol;
+        
+        while(l>=0 && m>=0){
+            if(board[l][m]=='Q') return false;
+            l--;
+            m--;
+        }
+        return true;    
+        
+    }
+    
+    void solveNQueensHelper(vector<string> &board, int curRow, int n){
+        
+        if(curRow==n){
+            res.push_back(board);
+            return;
+        }
+        
+            for(int curCol = 0; curCol < n; curCol++){
+                if(isSafe(board,curRow,curCol,n)){
+                    board[curRow][curCol] = 'Q';
+                    solveNQueensHelper(board,curRow+1,n);
+                    board[curRow][curCol] = '.';
+                }
+            }
+        
+            return; 
+    }
+    
+    vector<vector<string>> solveNQueens(int n) {
+        if(n <= 0) return {{}};
+        vector<string> board(n,string(n,'.'));        
+        solveNQueensHelper(board,0,n);
+        return res;
+    }
+};
