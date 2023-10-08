@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int maximumUniqueSubarray(vector<int>& nums) {
+        int cs = 0;
+        int ms = 0;
+        int start = 0;
+        if(nums.size()==1) return nums[0];
+        int end = 0;
+        unordered_set<int> sett;
+        // unordered_map<int,int> mapp;
+        
+        while(end<nums.size()){
+            
+            if(sett.find(nums[end])==sett.end()){
+                cs+=nums[end];
+                sett.insert(nums[end]);
+                // mapp[nums[end]]++;
+                end++;
+                ms = max(ms,cs);
+            }
+            else{
+                cs-=nums[start];
+                sett.erase(nums[start]);
+                // mapp[nums[start]]--;
+                start++;
+            }
+        }
+        return ms;
+    }
+};
