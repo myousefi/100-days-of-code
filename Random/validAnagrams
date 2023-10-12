@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size()!=t.size()) return false;
+        unordered_map<char,int> mapp;
+        
+        for(char ch:s){
+            if(mapp.find(ch)!=mapp.end()){
+                mapp[ch]++;
+            }
+            else{
+                mapp[ch] = 1;
+            }
+        }
+        
+        
+            int i=0;
+            while(mapp.find(t[i])!=mapp.end()){
+                mapp[t[i]]--;
+                i++;
+            }
+        
+        for(auto it:mapp){
+            if(it.second!=0) return false;
+        }
+        
+        
+        return true;
+    }
+};
