@@ -1,0 +1,28 @@
+// use set to sort them
+
+class Solution {
+public:
+    bool isDiglog(string log, int &i){
+        i=0;
+        while(log[i]!=' ') i++;
+        return log[i+1] < 'a';
+    }
+    vector<string> reorderLogFiles(vector<string>& logs) {
+        set<pair<string,string>> sett;
+        vector<string> diglogs;
+        vector<string> res;
+        int i;
+        for(auto log:logs){
+            if(isDiglog(log,i)){
+                diglogs.push_back(log);
+            }
+            else{
+                sett.insert({log.substr(i),log.substr(0,i)});
+            }
+        }
+        for(auto it:sett) res.push_back(it.second+it.first);
+        for(auto log:diglogs) res.push_back(log);
+        return res;
+        
+    }
+};
