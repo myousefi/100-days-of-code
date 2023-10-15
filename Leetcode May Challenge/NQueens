@@ -30,7 +30,7 @@ public:
             m--;
         }
         return true;    
-        
+      
     }
     
     void solveNQueensHelper(vector<string> &board, int curRow, int n){
