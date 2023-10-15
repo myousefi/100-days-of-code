@@ -1,0 +1,47 @@
+// O n^2
+
+class MyCalendar {
+public:
+    
+    vector<vector<int>> calendar;
+    MyCalendar() {
+        
+    }
+    
+    bool book(int start, int end) {
+        
+        for(int i=0;i<calendar.size();i++){
+            if(start<calendar[i][1] && end>calendar[i][0]) return false;
+        }
+        vector<int> temp = {start,end};
+        calendar.push_back(temp);
+        return true;
+        
+    }
+};
+
+/**
+ * Your MyCalendar object will be instantiated and called as such:
+ * MyCalendar* obj = new MyCalendar();
+ * bool param_1 = obj->book(start,end);
+ */
+ 
+ O nlogn
+ 
+ class MyCalendar {
+public:
+    set<pair<int,int>> sett;
+    MyCalendar() {
+        
+    }
+    
+    bool book(int start, int end) {
+        
+        auto it = sett.lower_bound({start,end});
+        if(it!=sett.begin() && start < prev(it)->second) return false;
+        if(it!=sett.end() && end > it->first) return false;
+        sett.insert({start,end});
+        return true;
+        
+    }
+};
