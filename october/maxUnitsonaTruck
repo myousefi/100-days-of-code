@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
+        
+        sort(boxTypes.begin(),boxTypes.end(), [] (const vector<int> &p1, const vector<int> &p2){   
+            return p2[1] < p1[1];            
+        });
+        
+        int ans = 0;
+       
+        for(auto v:boxTypes){
+            
+            int boxrequired = min(truckSize,v[0]);
+            ans+= boxrequired*v[1];
+            truckSize -= boxrequired;
+            if(truckSize==0) break;
+            
+        }
+        return ans;
+    }
+    
+    
+    
+};
