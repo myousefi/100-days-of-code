@@ -1,0 +1,22 @@
+O(nk) TLE
+
+class Solution {
+public:
+    int maxResult(vector<int>& nums, int k) {
+        int n = nums.size();
+        if(k<1) return 0;
+        vector<int> maxscore(n,0);
+        maxscore[0] = nums[0];
+        
+        for(int i=1;i<n;i++){
+        int maxx = INT_MIN;
+                for(int j=i-1;j>=max(0,i-k);j--){
+                    maxx = max(maxx,maxscore[j]);
+                }
+                maxscore[i] = maxx + nums[i]; 
+            
+            
+        }
+        return maxscore[n-1];
+    }
+};
