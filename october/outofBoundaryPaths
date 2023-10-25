@@ -14,3 +14,23 @@ public:
         
     }
 };
+
+class Solution {
+public:
+    const int M = 1000000007;
+    int dp[50][50][51] = {[0 ... 49] = {[0 ... 49] = {[0 ... 50] = -1 }}};    
+    int findPaths(int m, int n, int maxMove, int i, int j) {
+        if(i>=m || j>=n || i<0 || j<0){
+            return 1;
+        }
+        if(maxMove==0) return 0;
+        if(dp[i][j][maxMove]!=-1) return dp[i][j][maxMove];
+        dp[i][j][maxMove] =( 
+            (findPaths(m,n,maxMove-1,i+1,j)  + 
+            findPaths(m,n,maxMove-1,i-1,j)) % M+ 
+            (findPaths(m,n,maxMove-1,i,j+1)  + 
+            findPaths(m,n,maxMove-1,i,j-1) ) %M
+        ) % M;
+        return dp[i][j][maxMove];
+    }
+};
