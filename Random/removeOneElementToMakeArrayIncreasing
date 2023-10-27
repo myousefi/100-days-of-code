@@ -1,0 +1,35 @@
+// O N^3 shite solution 
+
+class Solution {
+public:
+    vector<int> remove(vector<int> nums, int i){
+        vector<int> temp;
+        for(int j=0;j<nums.size();j++){
+            if(j==i){
+                continue;
+            }
+            else{
+                temp.push_back(nums[j]);
+            }
+        }
+        return temp;
+    }
+    bool isincreasing(vector<int> nums, int i){
+        
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]<=nums[i-1])return false;
+        }
+        return true;
+    }
+    
+    bool canBeIncreasing(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++){
+            vector<int> temp = remove(nums,i);
+            if(isincreasing(temp,i)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+};
