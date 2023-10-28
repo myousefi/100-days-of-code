@@ -1,4 +1,4 @@
-// O N^3 shite solution 
+// O N^2 
 
 class Solution {
 public:
@@ -32,4 +32,39 @@ public:
         return false;
     }
     
+};
+
+// O(n)
+class Solution {
+public:
+    vector<int> remove(vector<int> nums,int pos){
+        vector<int> ans;
+        for(int i=0;i<nums.size();i++){
+            if(i==pos) continue;
+            ans.push_back(nums[i]);
+        }
+        return ans;
+    }
+    bool isIncreasing(vector<int> nums){
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]<=nums[i-1]) return false;
+        }
+        return true;
+    }
+    bool canBeIncreasing(vector<int>& nums) {
+        for(int i=0;i<nums.size()-1;i++){
+            if(nums[i]>=nums[i+1]){
+                if(isIncreasing(remove(nums,i))){
+                    return true;
+                }
+                else if(isIncreasing(remove(nums,i+1))){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 };
