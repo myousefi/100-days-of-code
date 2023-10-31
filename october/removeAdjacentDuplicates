@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        stack<char> st;
+        stack<char> st2;
+        string temp="";
+        st.push(s[0]);
+        for(int i=1;i<s.size();i++){
+            if(!st.empty() && st.top()==s[i]) {
+                st.pop();
+                continue;
+            }
+            else{
+                st.push(s[i]);
+            }            
+        }
+        while(!st.empty()){
+            char node = st.top();
+            st.pop();
+            st2.push(node);
+        }
+        while(!st2.empty()){
+            temp+=st2.top();
+            st2.pop();
+        }
+        return temp;
+    }
+};
