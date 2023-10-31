@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isArmstrong(int n) {
+        int size = 0;
+        int copy = n;
+        int copyy = n;
+        while(copy){
+            size++;
+            copy=copy/10;
+        }
+        int sum=0;
+        for(int i=1;i<=size;i++){
+            int num = copyy%10;
+            sum+=pow(num,size);
+            copyy=copyy/10;
+        }
+        return sum==n;
+    }
+};
