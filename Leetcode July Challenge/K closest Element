@@ -47,7 +47,7 @@ class Solution {
             }
         } 
 
-        // Build and return the window
+        
         for (int i = left + 1; i < right; i++) {
             result.add(arr[i]);
         }
