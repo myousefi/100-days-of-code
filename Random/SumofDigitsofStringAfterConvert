@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int getLucky(string s, int k) {
+        
+        
+        string num1 = "";
+        for(int i=0;i<s.size();i++){
+            num1+= to_string(s[i]-'a'+1);
+        }
+        int ans = 0;
+        
+        while(k--){
+            int i=0;
+            ans = 0;
+            while(i<num1.size()){
+             ans+=num1[i]-'0';
+             i++;   
+            }
+            num1=to_string(ans);
+            
+        }
+        return ans;
+    }
+};
