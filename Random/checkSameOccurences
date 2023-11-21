@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool areOccurrencesEqual(string s) {
+        unordered_map<char,int> mapp;
+        for(char ch:s){
+            if(mapp.find(ch)!=mapp.end()){
+                mapp[ch]++;
+            }
+            else{
+                mapp[ch] = 1;
+            }
+        }
+        vector<int> check;
+        for(auto it:mapp){
+            check.push_back(it.second);
+        }
+        for(int i=1;i<check.size();i++){
+            if(check[i]!=check[i-1]) return false;
+        }
+        return true;
+    }
+};
