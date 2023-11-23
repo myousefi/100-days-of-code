@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int smallestChair(vector<vector<int>>& times, int targetFriend) {
+        int n = times.size();
+        vector<int> chairs(n,-1);
+        vector<pair<pair<int,int>,int>> record;
+        for(int i=0;i<n;i++){
+            pair<pair<int,int>,int> p = {{times[i][0],times[i][1]},i};
+            record.push_back(p);
+        }
+        sort(record.begin(),record.end());
+        for(int i=0;i<n;i++){
+            int arrival = record[i].first.first;
+            int departure = record[i].first.second;
+            int target = record[i].second;
+            for(int j=0;j<n;j++){
+                if(arrival>=chairs[j]){
+                    chairs[j] = departure;
+                    if(target==targetFriend){
+                        return j;
+                    }
+                    break;
+                }   
+            }
+        }                       
+        return -10;
+    }
+};
