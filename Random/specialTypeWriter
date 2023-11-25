@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int mindistance(char first, char second){
+       
+        int s= max((int)first,(int)second);
+        int f= min((int)first,(int)second);
+        int clock = s-f;
+        int anticlock = f-s+26;
+        return min(clock,anticlock);
+    }
+    
+    int minTimeToType(string word) {
+        int firstmove = mindistance('a',word[0]);
+        int count = 0;
+        count+=firstmove;
+        for(int i=0;i<word.size()-1;i++){
+            count++; //printing word[i]
+            int move = mindistance(word[i],word[i+1]);
+            count+=move;
+        }
+        count++;
+        return count;
+    }
+};
