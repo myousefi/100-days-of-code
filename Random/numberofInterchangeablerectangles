@@ -1,0 +1,37 @@
+class Solution {
+public:
+    long long fact(long long n){
+        long long ans = 1;
+        for(int i=n; i>=1;i--){
+            ans*=i;
+        }
+        return ans;
+    }
+    long long comb(int n, int r){
+        return fact(n) / (fact(r)*fact(n-r));
+        
+    }
+    long long interchangeableRectangles(vector<vector<int>>& rectangles) {
+        vector<double> ratio;
+        for(int i=0;i<rectangles.size();i++){
+            ratio.push_back((double)rectangles[i][0]/rectangles[i][1]);
+        }
+        long long ans = 0;
+        unordered_map<double,long long> mapp;
+        for(int i=0;i<ratio.size();i++){
+            if(mapp.find(ratio[i])!=mapp.end()){
+                mapp[ratio[i]]++;
+            }
+            else{
+                mapp[ratio[i]] = 1;
+            }
+        }
+        for(auto it:mapp){
+            if(it.second>1){
+                // ans+=comb(it.second,2);
+                ans+=(it.second*(it.second-1))/2;
+            }
+        }
+        return ans;
+    }
+};
