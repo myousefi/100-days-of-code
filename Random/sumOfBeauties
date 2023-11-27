@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int sumOfBeauties(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> maxOnLeft(n);
+        maxOnLeft[0] = nums[0];
+        int maxx = nums[0];
+        for(int i=1;i<nums.size();i++){
+            maxx = max(maxx,nums[i]);
+            maxOnLeft[i] = maxx;
+        }
+        
+        vector<int> minOnRight(n);
+        minOnRight[n-1] = nums[n-1];
+        int minn = nums[n-1];
+        for(int i=n-2;i>=0;i--){
+            minn = min(minn,nums[i]);
+            minOnRight[i] = minn;
+        }
+        int ans = 0;
+        for(int i=1;i<n-1;i++){
+            if(nums[i]>maxOnLeft[i-1] && nums[i] < minOnRight[i+1]) ans+=2;
+            else if(nums[i] > nums[i-1] && nums[i] < nums[i+1]) ans+=1;
+        }
+        return ans;
+    }
+};
