@@ -1,0 +1,31 @@
+class Solution {
+public:
+    long long gridGame(vector<vector<int>>& grid) {
+        int n = grid[0].size();
+        vector<long long> prefixSum1(n);
+        prefixSum1[0] = grid[0][0];
+        vector<long long> prefixSum2(n);
+        prefixSum2[0] = grid[1][0];
+        
+        for(int i=1;i<grid[0].size();i++){
+            prefixSum1[i] = grid[0][i] + prefixSum1[i-1];
+            prefixSum2[i] = grid[1][i] + prefixSum2[i-1];
+        } 
+        long long ans = LONG_MAX;
+        long long topSum = 0;
+        long long bottomSum = 0;
+        long long secondRobotPoints = 0;
+        for(int i=0;i<grid[0].size();i++){
+            topSum = prefixSum1[n-1] - prefixSum1[i];
+            if(i>0){
+                bottomSum = prefixSum2[i-1];
+            }
+            else{
+                bottomSum = 0;
+            }
+            secondRobotPoints = max(topSum,bottomSum);
+            ans = min(ans,secondRobotPoints);
+        }
+        return ans;
+    }
+};
