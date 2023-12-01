@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool isPresent(vector<int> arr,int num){
+        for(int i=0; i<arr.size(); i++){
+            if(arr[i]==num) return true;
+        }
+        return false;
+    }
+    
+    vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
+        vector<int> ans;
+        unordered_set<int> sett;
+        
+        for(int i=0;i<nums1.size();i++){
+            if(isPresent(nums2,nums1[i]) || isPresent(nums3,nums1[i])){
+                sett.insert(nums1[i]);
+            }
+        }
+        
+        for(int i=0;i<nums2.size();i++){
+            if(isPresent(nums1,nums2[i]) || isPresent(nums3,nums2[i])){
+                sett.insert(nums2[i]);
+            }
+        }
+        
+        for(int i=0;i<nums3.size();i++){
+            if(isPresent(nums2,nums3[i]) || isPresent(nums1,nums3[i])){
+                sett.insert(nums3[i]);
+            }
+        }
+        for(auto it=sett.begin();it!=sett.end();it++){
+            ans.push_back(*it);
+        }
+        return ans;
+    }
+};
