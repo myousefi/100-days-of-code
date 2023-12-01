@@ -1,0 +1,33 @@
+class MovingAverage {
+public:
+    int n;
+    vector<int> window;
+    
+    MovingAverage(int size) {
+        n = size;
+    }
+    
+    double next(int val) {
+        if (window.size() < n) {
+            window.push_back(val);
+        }
+        else if (window.size() >= n) {
+            window.erase(window.begin());
+            window.push_back(val);
+        }
+        
+        double sum = 0;
+        int cnt = window.size();
+        for(int n : window){ 
+            sum += n;
+        }
+        return sum / cnt;
+        
+    }
+};
+
+/**
+ * Your MovingAverage object will be instantiated and called as such:
+ * MovingAverage* obj = new MovingAverage(size);
+ * double param_1 = obj->next(val);
+ */
