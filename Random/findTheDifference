@@ -1,0 +1,24 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        
+        unordered_map<char,int> mapp;
+        for(char ch : s) {
+            if(mapp.find(ch)!=mapp.end()) {
+                mapp[ch]++;
+            }
+            else {
+                mapp[ch] = 1;
+            }
+        }
+        for(char ch : t) {
+            if(mapp.find(ch)!=mapp.end() && mapp[ch]!=0) {
+                mapp[ch]--;
+            }
+            else {
+                return ch;
+            }
+        }
+        return 'k';
+    }
+};
