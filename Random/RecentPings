@@ -1,0 +1,19 @@
+Deque, Sliding Window 
+
+class RecentCounter {
+public:
+    
+    deque<int> window;
+    
+    RecentCounter() {
+        
+    }
+    
+    int ping(int t) {
+        window.push_back(t);
+        while(window.front() < t - 3000) {
+            window.pop_front();
+        }
+        return window.size();
+    }
+};
