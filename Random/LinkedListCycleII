@@ -1,0 +1,31 @@
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        ListNode* secondptr = NULL;
+        ListNode* firstptr = head;
+        
+        bool isCycle = false;
+        while(fast && fast->next) {
+            slow = slow -> next;
+            fast = fast->next->next;
+            if (slow == fast) {
+                secondptr = fast;
+                isCycle = true;
+                break;
+            }
+        }
+        if (isCycle == false) {
+            return NULL;
+        }
+        
+        while(firstptr != secondptr) {
+            firstptr = firstptr->next;
+            secondptr = secondptr->next;
+        }
+        return firstptr;
+    }
+};
