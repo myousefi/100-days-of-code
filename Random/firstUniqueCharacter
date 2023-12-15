@@ -18,3 +18,27 @@ public:
         
     }
 };
+
+
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        unordered_map<char,pair<int,int>> mapp;
+        
+        for(int i = 0; i < s.size(); i++) {
+            if (mapp.find(s[i]) != mapp.end()) {
+                mapp[s[i]].first++;
+            }
+            else {
+                mapp[s[i]].first = 1;
+            }
+            mapp[s[i]].second = i;
+        }
+        for(char ch : s) {
+            if(mapp[ch].first == 1) {
+                return mapp[ch].second;
+            }
+        }
+        return -1;
+    }
+};
