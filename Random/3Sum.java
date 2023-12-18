@@ -1,6 +1,6 @@
 // two ptrs
 
-class Solution {
+class Solution  {
     public List<List<Integer>> threeSum(int[] nums) {
         int n = nums.length;
 
