@@ -1,0 +1,19 @@
+vector<vector<int>> ans;
+        if(root == NULL) return ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()) {
+            vector<int> temp; 
+            int n = q.size();
+            for(int i = 1; i <= n; i++) {
+                temp.push_back(q.front()->val);
+                TreeNode* tempp = q.front();
+                q.pop();
+                if(tempp->left) q.push(tempp->left);
+                if(tempp->right) q.push(tempp->right);
+            }
+            ans.push_back(temp);
+            
+        }
+        return ans;
+    }
