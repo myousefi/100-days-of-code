@@ -1,0 +1,31 @@
+
+// preorder array is used to keep track of the root, inorder array is where
+    // pointers are shifted and used to construct the tree. 
+    
+    
+class Solution {
+public:
+    
+    TreeNode* helper(vector<int>& preorder, vector<int>& inorder,
+                     int rootPos, int istart, int iend) {
+        
+        if(istart > iend || rootPos < 0 || rootPos > preorder.size() -1) {
+            return NULL;
+        }
+        
+        int idx = 0;
+        while(inorder[idx] != preorder[rootPos]) {
+            idx++;
+        }
+        
+        TreeNode* root = new TreeNode(preorder[rootPos]);
+        root -> left = helper(preorder, inorder, rootPos + 1, istart, idx - 1);
+        root -> right = helper(preorder, inorder,rootPos + idx - istart + 1, idx + 1, iend);
+        
+        return root;
+    }
+    
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        return helper(preorder, inorder, 0, 0, inorder.size() - 1);
+    }
+};
