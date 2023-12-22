@@ -1,0 +1,32 @@
+class UndergroundSystem {
+private: 
+    unordered_map<int, pair<string,int>> log;
+    map<pair<string,string>,pair<int,int>> table;
+public:
+    
+    UndergroundSystem() {
+        
+    }
+    
+    void checkIn(int id, string stationName, int t) {
+        log[id] = {stationName, t};
+    }
+    
+    void checkOut(int id, string stationName, int t) {
+        pair<string, string> p = {log[id].first, stationName};
+        if(table.find(p) != table.end()) {
+            int timeBefore = table[p].first;
+            int timeSumNew = timeBefore + t - log[id].second;
+            int cnt = table[p].second;
+            table[p] = make_pair(timeSumNew,++cnt);
+        }
+        else {
+            table[p] = {t - log[id].second, 1};
+        }
+        log.erase(log.find(id));
+    }
+    
+    double getAverageTime(string startStation, string endStation) {
+        return (double)table[make_pair(startStation,endStation)].first /                                            table[make_pair(startStation,endStation)].second;
+    }
+};
