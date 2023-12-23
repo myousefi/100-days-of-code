@@ -1,4 +1,4 @@
-// two ptrs
+// two ptr
 
 class Solution  {
     public List<List<Integer>> threeSum(int[] nums) {
