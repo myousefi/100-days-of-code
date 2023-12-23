@@ -1,0 +1,38 @@
+class LRUCache {
+public:
+    list<int> keys;
+    unordered_map<int, pair<int, list<int>::iterator>> mapp;
+    int _capacity;
+    LRUCache(int capacity) {
+        _capacity = capacity;
+    }
+    
+    int get(int key) {
+        if(mapp.find(key)!=mapp.end()) {
+            keys.erase(mapp[key].second);
+            keys.push_front(key);
+            mapp[key].second = keys.begin();
+            return mapp[key].first;
+        }
+        else {
+            return -1;
+        }
+    }
+    
+    void put(int key, int value) {
+        if(mapp.find(key) != mapp.end()) {
+            keys.erase(mapp[key].second);
+            keys.push_front(key);
+            mapp[key] = {value, keys.begin()};
+        }
+        else {
+            if(mapp.size() == _capacity) { //map.size() == capacity
+                mapp.erase(keys.back());
+                keys.pop_back();
+            }
+            keys.push_front(key);
+            mapp[key] = {value, keys.begin()};
+        }
+        return;
+    }
+};
